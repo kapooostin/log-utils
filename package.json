@@ -1,6 +1,6 @@
 {
   "name": "log-utils",
-  "description": "Basic utils for command line applications.",
+  "description": "Basic logging utils: colors, symbols and timestamp.",
   "version": "0.1.0",
   "homepage": "https://github.com/jonschlinkert/log-utils",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",

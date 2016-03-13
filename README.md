@@ -1,6 +1,6 @@
 # log-utils [![NPM version](https://img.shields.io/npm/v/log-utils.svg)](https://www.npmjs.com/package/log-utils) [![Build Status](https://img.shields.io/travis/jonschlinkert/log-utils.svg)](https://travis-ci.org/jonschlinkert/log-utils)
 
-> Basic utils for command line applications.
+> Basic logging utils: colors, symbols and timestamp.
 
 ## Install
 
