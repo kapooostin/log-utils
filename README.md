@@ -119,7 +119,7 @@ console.log(utils.timestamp);
 //=> [15:27:46]
 ```
 
-### [.ok](index.js#L179)
+### [.ok](index.js#L178)
 
 Log a white success message prefixed by a green check.
 
@@ -130,7 +130,7 @@ utils.ok('Alright!');
 //=> '✔ Alright!'
 ```
 
-### [.spinner](index.js#L194)
+### [.spinner](index.js#L193)
 
 Start a basic terminal spinner. Currently this only allows for one spinner at a time, but there are plans to allow multiple named spinners.
 
@@ -140,7 +140,7 @@ Start a basic terminal spinner. Currently this only allows for one spinner at a 
 utils.spinner('downloading...');
 ```
 
-### [.spinner.stop](index.js#L220)
+### [.spinner.stop](index.js#L219)
 
 Stop a spinner.
 
@@ -150,7 +150,7 @@ Stop a spinner.
 utils.spinner.stop('finished downloading');
 ```
 
-### [.spinner.startTimer](index.js#L240)
+### [.spinner.startTimer](index.js#L239)
 
 Start a timer with a spinner. Requires an instance of [time-diff][] as the first argument.
 
@@ -162,7 +162,7 @@ var time = new Time();
 utils.spinner.startTimer(time, 'foo', 'downloading');
 ```
 
-### [.spinner.stopTimer](index.js#L258)
+### [.spinner.stopTimer](index.js#L257)
 
 Stop a spinner-timer.
 
