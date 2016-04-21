@@ -22,6 +22,10 @@ require('warning-symbol');
 require('time-stamp');
 require = fn;
 
+/**
+ * Expose `colors` and `symbols`
+ */
+
 utils.colors = require('ansi-colors');
 utils.symbol = {};
 
@@ -90,6 +94,7 @@ define(utils.symbol, 'warning', function() {
  *
  * ```js
  * console.log(utils.error);
+ * //=> ✖
  * ```
  * @name .error
  * @api public
@@ -104,6 +109,7 @@ define(utils, 'error', function() {
  *
  * ```js
  * console.log(utils.info);
+ * //=> ℹ
  * ```
  * @name .info
  * @api public
@@ -118,6 +124,7 @@ define(utils, 'info', function() {
  *
  * ```js
  * console.log(utils.success);
+ * //=> ✔
  * ```
  * @name .success
  * @api public
@@ -132,6 +139,7 @@ define(utils, 'success', function() {
  *
  * ```js
  * console.log(utils.warning);
+ * //=> ⚠
  * ```
  * @name .warning
  * @api public
@@ -146,6 +154,7 @@ define(utils, 'warning', function() {
  *
  * ```js
  * console.log(utils.timestamp);
+ * //=> [15:27:46]
  * ```
  * @name .timestamp
  * @api public
@@ -154,6 +163,104 @@ define(utils, 'warning', function() {
 define(utils, 'timestamp', function() {
   return '[' + utils.gray(utils.timeStamp('HH:mm:ss')) + ']';
 });
+
+/**
+ * Log a white success message prefixed by a green check.
+ *
+ * ```js
+ * utils.ok('Alright!');
+ * //=> '✔ Alright!'
+ * ```
+ * @name .ok
+ * @api public
+ */
+
+utils.ok = function() {
+  console.log.bind(console, utils.success).apply(console, arguments);
+};
+
+/**
+ * Start a basic terminal spinner. Currently this only allows for one
+ * spinner at a time, but there are plans to allow multiple named spinners.
+ *
+ * ```js
+ * utils.spinner('downloading...');
+ * ```
+ * @name .spinner
+ * @api public
+ */
+
+utils.spinner = spinner;
+
+function spinner(name, msg, options) {
+  options = options || {};
+  var interval = options.hasOwnProperty('interval') ? options.interval : 150;
+  var chars = options.spinner || ['|', '/', '-', '\\', '-'];
+  var len = chars.length;
+  var idx = 0;
+
+  spinner.timer = setInterval(function() {
+    process.stdout.clearLine();
+    process.stdout.cursorTo(1);
+    process.stdout.write('\u001b[0G ' + chars[idx++ % len] + ' ' + msg);
+  }, interval);
+};
+
+/**
+ * Stop a spinner.
+ *
+ * ```js
+ * utils.spinner.stop('finished downloading');
+ * ```
+ * @name .spinner.stop
+ * @api public
+ */
+
+spinner.stop = function stopSpinner(msg) {
+  process.stdout.clearLine();
+  process.stdout.cursorTo(1);
+  process.stdout.write('\u001b[2K' + msg);
+  clearInterval(spinner.timer);
+};
+
+/**
+ * Start a timer with a spinner. Requires an instance of [time-diff][] as
+ * the first argument.
+ *
+ * ```js
+ * var Time = require('time-diff');
+ * var time = new Time();
+ * utils.spinner.startTimer(time, 'foo', 'downloading');
+ * ```
+ * @name .spinner.startTimer
+ * @api public
+ */
+
+spinner.startTimer = function start(time, name, msg, options) {
+  options = options || {};
+  if (options.verbose !== false) {
+    time.start(name);
+    spinner(msg, options);
+  }
+};
+
+/**
+ * Stop a spinner-timer.
+ *
+ * ```js
+ * utils.spinner.stopTimer(time, 'foo', 'finished downloading');
+ * ```
+ * @name .spinner.stopTimer
+ * @api public
+ */
+
+spinner.stopTimer = function stop(time, name, msg, options) {
+  options = options || {};
+  if (options.verbose !== false) {
+    var ts = utils.colors.magenta('+' + time.end(name));
+    spinner.stop(utils.success + ' ' + msg + ' ' + ts + '\n');
+  }
+};
 
 function define(obj, prop, fn) {
   Object.defineProperty(obj, prop, {
