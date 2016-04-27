@@ -7,6 +7,7 @@
 
 'use strict';
 
+var readline = require('readline');
 var utils = require('ansi-colors');
 var fn = require;
 require = utils;
@@ -200,8 +201,8 @@ function spinner(name, msg, options) {
   var idx = 0;
 
   spinner.timer = setInterval(function() {
-    process.stdout.clearLine();
-    process.stdout.cursorTo(1);
+    readline.clearLine();
+    readline.cursorTo(1);
     process.stdout.write('\u001b[0G ' + chars[idx++ % len] + ' ' + msg);
   }, interval);
 };
@@ -217,8 +218,8 @@ function spinner(name, msg, options) {
  */
 
 spinner.stop = function stopSpinner(msg) {
-  process.stdout.clearLine();
-  process.stdout.cursorTo(1);
+  readline.clearLine();
+  readline.cursorTo(1);
   process.stdout.write('\u001b[2K' + msg);
   clearInterval(spinner.timer);
 };
