@@ -259,7 +259,7 @@ spinner.stopTimer = function stop(time, name, msg, options) {
   options = options || {};
   if (options.verbose !== false) {
     var ts = utils.colors.magenta('+' + time.end(name));
-    spinner.stop(utils.success + ' ' + msg + ' ' + ts + '\n');
+    spinner.stop(' ' + utils.success + ' ' + msg + ' ' + ts + '\n');
   }
 };
 
