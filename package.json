@@ -1,7 +1,7 @@
 {
   "name": "log-utils",
   "description": "Basic logging utils: colors, symbols and timestamp.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/jonschlinkert/log-utils",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/log-utils",
@@ -22,7 +22,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ansi-colors": "^0.1.0",
+    "ansi-colors": "^0.2.0",
     "error-symbol": "^0.1.0",
     "info-symbol": "^0.1.0",
     "log-ok": "^0.1.1",
