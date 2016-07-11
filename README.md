@@ -7,7 +7,7 @@ Basic logging utils: colors, symbols and timestamp.
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install log-utils --save
+$ npm install --save log-utils
 ```
 
 All module dependencies are tiny and are lazily evaluated, this takes around ~1 millisecond to load.
@@ -15,7 +15,7 @@ All module dependencies are tiny and are lazily evaluated, this takes around ~1 
 ## Usage
 
 ```js
-var lu = require('log-utils');
+var log = require('log-utils');
 ```
 
 ## API
@@ -27,7 +27,7 @@ Error symbol.
 **Example**
 
 ```js
-console.log(utils.symbol.error);
+console.log(log.symbol.error);
 //=> ✖
 ```
 
@@ -38,7 +38,7 @@ Info symbol.
 **Example**
 
 ```js
-console.log(utils.symbol.info);
+console.log(log.symbol.info);
 //=> ℹ
 ```
 
@@ -49,7 +49,7 @@ Success symbol.
 **Example**
 
 ```js
-console.log(utils.symbol.success);
+console.log(log.symbol.success);
 //=> ✔
 ```
 
@@ -60,7 +60,7 @@ Warning symbol.
 **Example**
 
 ```js
-console.log(utils.symbol.warning);
+console.log(log.symbol.warning);
 //=> ⚠
 ```
 
@@ -71,7 +71,7 @@ Get a red error symbol.
 **Example**
 
 ```js
-console.log(utils.error);
+console.log(log.error);
 //=> ✖
 ```
 
@@ -82,7 +82,7 @@ Get a cyan info symbol.
 **Example**
 
 ```js
-console.log(utils.info);
+console.log(log.info);
 //=> ℹ
 ```
 
@@ -93,7 +93,7 @@ Get a green success symbol.
 **Example**
 
 ```js
-console.log(utils.success);
+console.log(log.success);
 //=> ✔
 ```
 
@@ -104,7 +104,7 @@ Get a yellow warning symbol.
 **Example**
 
 ```js
-console.log(utils.warning);
+console.log(log.warning);
 //=> ⚠
 ```
 
@@ -115,7 +115,7 @@ Get a formatted timestamp.
 **Example**
 
 ```js
-console.log(utils.timestamp);
+console.log(log.timestamp);
 //=> [15:27:46]
 ```
 
@@ -126,109 +126,121 @@ Log a white success message prefixed by a green check.
 **Example**
 
 ```js
-utils.ok('Alright!');
+log.ok('Alright!');
 //=> '✔ Alright!'
 ```
 
-### [.spinner](index.js#L194)
+### [.heading](index.js#L193)
+
+Make the given text bold and underlined.
+
+**Example**
+
+```js
+console.log(log.heading('foo'));
+// or
+console.log(log.heading('foo', 'bar'));
+```
+
+### [.spinner](index.js#L218)
 
 Start a basic terminal spinner. Currently this only allows for one spinner at a time, but there are plans to allow multiple named spinners.
 
 **Example**
 
 ```js
-utils.spinner('downloading...');
+log.spinner('downloading...');
 ```
 
-### [.spinner.stop](index.js#L220)
+### [.spinner.stop](index.js#L244)
 
 Stop a spinner.
 
 **Example**
 
 ```js
-utils.spinner.stop('finished downloading');
+log.spinner.stop('finished downloading');
 ```
 
-### [.spinner.startTimer](index.js#L240)
+### [.spinner.startTimer](index.js#L264)
 
-Start a timer with a spinner. Requires an instance of [time-diff][] as the first argument.
+Start a timer with a spinner. Requires an instance of [time-diff](https://github.com/jonschlinkert/time-diff) as the first argument.
 
 **Example**
 
 ```js
 var Time = require('time-diff');
 var time = new Time();
-utils.spinner.startTimer(time, 'foo', 'downloading');
+log.spinner.startTimer(time, 'foo', 'downloading');
 ```
 
-### [.spinner.stopTimer](index.js#L258)
+### [.spinner.stopTimer](index.js#L282)
 
 Stop a spinner-timer.
 
 **Example**
 
 ```js
-utils.spinner.stopTimer(time, 'foo', 'finished downloading');
+log.spinner.stopTimer(time, 'foo', 'finished downloading');
 ```
 
 ### Colors
 
 Available colors from [ansi-colors](https://github.com/doowb/ansi-colors):
 
-* `.bgblack()`
-* `.bgblue()`
-* `.bgcyan()`
-* `.bggreen()`
-* `.bgmagenta()`
-* `.bgred()`
-* `.bgwhite()`
-* `.bgyellow()`
-* `.black()`
-* `.blue()`
-* `.bold()`
-* `.cyan()`
-* `.dim()`
-* `.gray()`
-* `.green()`
-* `.grey()`
-* `.hidden()`
-* `.inverse()`
-* `.italic()`
-* `.magenta()`
-* `.red()`
-* `.reset()`
-* `.strikethrough()`
-* `.underline()`
-* `.white()`
-* `.yellow()`
+* `.bgblack`
+* `.bgblue`
+* `.bgcyan`
+* `.bggreen`
+* `.bgmagenta`
+* `.bgred`
+* `.bgwhite`
+* `.bgyellow`
+* `.black`
+* `.blue`
+* `.bold`
+* `.cyan`
+* `.dim`
+* `.gray`
+* `.green`
+* `.grey`
+* `.hidden`
+* `.inverse`
+* `.italic`
+* `.magenta`
+* `.red`
+* `.reset`
+* `.strikethrough`
+* `.underline`
+* `.white`
+* `.yellow`
 
 ## Related projects
 
 You might also be interested in these projects:
 
-* [ansi-colors](https://www.npmjs.com/package/ansi-colors): Collection of ansi colors and styles. | [homepage](https://github.com/doowb/ansi-colors)
-* [error-symbol](https://www.npmjs.com/package/error-symbol): Cross-platform error symbol. | [homepage](https://github.com/jonschlinkert/error-symbol)
-* [info-symbol](https://www.npmjs.com/package/info-symbol): Cross-platform info symbol. | [homepage](https://github.com/jonschlinkert/info-symbol)
-* [success-symbol](https://www.npmjs.com/package/success-symbol): Cross-platform success symbol. | [homepage](https://github.com/jonschlinkert/success-symbol)
-* [warning-symbol](https://www.npmjs.com/package/warning-symbol): Cross-platform warning symbol. | [homepage](https://github.com/jonschlinkert/warning-symbol)
+* [ansi-colors](https://www.npmjs.com/package/ansi-colors): Collection of ansi colors and styles. | [homepage](https://github.com/doowb/ansi-colors "Collection of ansi colors and styles.")
+* [error-symbol](https://www.npmjs.com/package/error-symbol): Cross-platform error symbol. | [homepage](https://github.com/jonschlinkert/error-symbol "Cross-platform error symbol.")
+* [info-symbol](https://www.npmjs.com/package/info-symbol): Cross-platform info symbol. | [homepage](https://github.com/jonschlinkert/info-symbol "Cross-platform info symbol.")
+* [success-symbol](https://www.npmjs.com/package/success-symbol): Cross-platform success symbol. | [homepage](https://github.com/jonschlinkert/success-symbol "Cross-platform success symbol.")
+* [warning-symbol](https://www.npmjs.com/package/warning-symbol): Cross-platform warning symbol. | [homepage](https://github.com/jonschlinkert/warning-symbol "Cross-platform warning symbol.")
 
 ## Contributing
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/log-utils/issues/new).
+This document was generated by [verb-readme-generator](https://github.com/verbose/verb-readme-generator) (a [verb](https://github.com/verbose/verb) generator), please don't edit directly. Any changes to the readme must be made in [.verb.md](.verb.md). See [Building Docs](#building-docs).
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
+
+Or visit the [verb-readme-generator](https://github.com/verbose/verb-readme-generator) project to submit bug reports or pull requests for the readme layout template.
 
 ## Building docs
+
+_(This document was generated by [verb-readme-generator](https://github.com/verbose/verb-readme-generator) (a [verb](https://github.com/verbose/verb) generator), please don't edit the readme directly. Any changes to the readme must be made in [.verb.md](.verb.md).)_
 
 Generate readme and API documentation with [verb](https://github.com/verbose/verb):
 
 ```sh
-$ npm install verb && npm run docs
-```
-
-Or, if [verb](https://github.com/verbose/verb) is installed globally:
-
-```sh
-$ verb
+$ npm install -g verb verb-readme-generator && verb
 ```
 
 ## Running tests
@@ -253,4 +265,4 @@ Released under the [MIT license](https://github.com/jonschlinkert/log-utils/blob
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on May 03, 2016._
+_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on July 11, 2016._
