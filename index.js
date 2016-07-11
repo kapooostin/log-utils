@@ -8,9 +8,9 @@
 'use strict';
 
 var readline = require('readline');
-var utils = require('ansi-colors');
+var log = require('ansi-colors');
 var fn = require;
-require = utils;
+require = log;
 
 /**
  * Utils
@@ -27,157 +27,181 @@ require = fn;
  * Expose `colors` and `symbols`
  */
 
-utils.colors = require('ansi-colors');
-utils.symbol = {};
+log.colors = require('ansi-colors');
+log.symbol = {};
 
 /**
  * Error symbol.
  *
  * ```js
- * console.log(utils.symbol.error);
+ * console.log(log.symbol.error);
  * //=> ✖
  * ```
  * @name .symbol.error
  * @api public
  */
 
-define(utils.symbol, 'error', function() {
-  return utils.errorSymbol;
+getter(log.symbol, 'error', function() {
+  return log.errorSymbol;
 });
 
 /**
  * Info symbol.
  *
  * ```js
- * console.log(utils.symbol.info);
+ * console.log(log.symbol.info);
  * //=> ℹ
  * ```
  * @name .symbol.info
  * @api public
  */
 
-define(utils.symbol, 'info', function() {
-  return utils.infoSymbol;
+getter(log.symbol, 'info', function() {
+  return log.infoSymbol;
 });
 
 /**
  * Success symbol.
  *
  * ```js
- * console.log(utils.symbol.success);
+ * console.log(log.symbol.success);
  * //=> ✔
  * ```
  * @name .symbol.success
  * @api public
  */
 
-define(utils.symbol, 'success', function() {
-  return utils.check;
+getter(log.symbol, 'success', function() {
+  return log.check;
 });
 
 /**
  * Warning symbol.
  *
  * ```js
- * console.log(utils.symbol.warning);
+ * console.log(log.symbol.warning);
  * //=> ⚠
  * ```
  * @name .symbol.warning
  * @api public
  */
 
-define(utils.symbol, 'warning', function() {
-  return utils.warningSymbol;
+getter(log.symbol, 'warning', function() {
+  return log.warningSymbol;
 });
 
 /**
  * Get a red error symbol.
  *
  * ```js
- * console.log(utils.error);
+ * console.log(log.error);
  * //=> ✖
  * ```
  * @name .error
  * @api public
  */
 
-define(utils, 'error', function() {
-  return utils.red(utils.symbol.error);
+getter(log, 'error', function() {
+  return log.red(log.symbol.error);
 });
 
 /**
  * Get a cyan info symbol.
  *
  * ```js
- * console.log(utils.info);
+ * console.log(log.info);
  * //=> ℹ
  * ```
  * @name .info
  * @api public
  */
 
-define(utils, 'info', function() {
-  return utils.cyan(utils.symbol.info);
+getter(log, 'info', function() {
+  return log.cyan(log.symbol.info);
 });
 
 /**
  * Get a green success symbol.
  *
  * ```js
- * console.log(utils.success);
+ * console.log(log.success);
  * //=> ✔
  * ```
  * @name .success
  * @api public
  */
 
-define(utils, 'success', function() {
-  return utils.green(utils.symbol.success);
+getter(log, 'success', function() {
+  return log.green(log.symbol.success);
 });
 
 /**
  * Get a yellow warning symbol.
  *
  * ```js
- * console.log(utils.warning);
+ * console.log(log.warning);
  * //=> ⚠
  * ```
  * @name .warning
  * @api public
  */
 
-define(utils, 'warning', function() {
-  return utils.yellow(utils.symbol.warning);
+getter(log, 'warning', function() {
+  return log.yellow(log.symbol.warning);
 });
 
 /**
  * Get a formatted timestamp.
  *
  * ```js
- * console.log(utils.timestamp);
+ * console.log(log.timestamp);
  * //=> [15:27:46]
  * ```
  * @name .timestamp
  * @api public
  */
 
-define(utils, 'timestamp', function() {
-  return '[' + utils.gray(utils.timeStamp('HH:mm:ss')) + ']';
+getter(log, 'timestamp', function() {
+  return '[' + log.gray(log.timeStamp('HH:mm:ss')) + ']';
 });
 
 /**
  * Log a white success message prefixed by a green check.
  *
  * ```js
- * utils.ok('Alright!');
+ * log.ok('Alright!');
  * //=> '✔ Alright!'
  * ```
  * @name .ok
  * @api public
  */
 
-utils.ok = function() {
-  console.log.bind(console, utils.success).apply(console, arguments);
+log.ok = require('log-ok');
+
+/**
+ * Make the given text bold and underlined.
+ *
+ * ```js
+ * console.log(log.heading('foo'));
+ * // or
+ * console.log(log.heading('foo', 'bar'));
+ * ```
+ * @name .heading
+ * @api public
+ */
+
+log.heading = function() {
+  var args = [].concat.apply([], [].slice.call(arguments));
+  var len = args.length;
+  var idx = -1;
+  var headings = [];
+  while (++idx < len) {
+    var str = args[idx];
+    if (typeof str === 'string') {
+      headings.push(log.bold(log.underline(str)));
+    }
+  }
+  return headings.join(' ');
 };
 
 /**
@@ -185,13 +209,13 @@ utils.ok = function() {
  * spinner at a time, but there are plans to allow multiple named spinners.
  *
  * ```js
- * utils.spinner('downloading...');
+ * log.spinner('downloading...');
  * ```
  * @name .spinner
  * @api public
  */
 
-utils.spinner = spinner;
+log.spinner = spinner;
 
 function spinner(name, msg, options) {
   options = options || {};
@@ -211,7 +235,7 @@ function spinner(name, msg, options) {
  * Stop a spinner.
  *
  * ```js
- * utils.spinner.stop('finished downloading');
+ * log.spinner.stop('finished downloading');
  * ```
  * @name .spinner.stop
  * @api public
@@ -231,7 +255,7 @@ spinner.stop = function stopSpinner(msg) {
  * ```js
  * var Time = require('time-diff');
  * var time = new Time();
- * utils.spinner.startTimer(time, 'foo', 'downloading');
+ * log.spinner.startTimer(time, 'foo', 'downloading');
  * ```
  * @name .spinner.startTimer
  * @api public
@@ -249,7 +273,7 @@ spinner.startTimer = function start(time, name, msg, options) {
  * Stop a spinner-timer.
  *
  * ```js
- * utils.spinner.stopTimer(time, 'foo', 'finished downloading');
+ * log.spinner.stopTimer(time, 'foo', 'finished downloading');
  * ```
  * @name .spinner.stopTimer
  * @api public
@@ -258,12 +282,16 @@ spinner.startTimer = function start(time, name, msg, options) {
 spinner.stopTimer = function stop(time, name, msg, options) {
   options = options || {};
   if (options.verbose !== false) {
-    var ts = utils.colors.magenta('+' + time.end(name));
-    spinner.stop(' ' + utils.success + ' ' + msg + ' ' + ts + '\n');
+    var ts = log.colors.magenta('+' + time.end(name));
+    spinner.stop(' ' + log.success + ' ' + msg + ' ' + ts + '\n');
   }
 };
 
-function define(obj, prop, fn) {
+/**
+ * Utility for defining a getter
+ */
+
+function getter(obj, prop, fn) {
   Object.defineProperty(obj, prop, {
     configurable: true,
     enumerable: true,
@@ -272,8 +300,8 @@ function define(obj, prop, fn) {
 }
 
 /**
- * Expose `utils`
+ * Expose `log`
  */
 
-module.exports = utils;
+module.exports = log;
 
