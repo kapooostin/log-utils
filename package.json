@@ -10,7 +10,9 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "LICENSE",
+    "README.md"
   ],
   "main": "index.js",
   "engines": {
@@ -23,13 +25,16 @@
     "ansi-colors": "^0.1.0",
     "error-symbol": "^0.1.0",
     "info-symbol": "^0.1.0",
+    "log-ok": "^0.1.1",
     "success-symbol": "^0.1.0",
     "time-stamp": "^1.0.1",
     "warning-symbol": "^0.1.0"
   },
   "devDependencies": {
+    "clear-require": "^1.0.1",
     "gulp-format-md": "^0.1.7",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "verb-generate-readme": "^0.1.21"
   },
   "keywords": [
     "ansi",
@@ -74,7 +79,9 @@
     "layout": "default",
     "reflinks": [
       "ansi-colors",
-      "verb"
+      "time-diff",
+      "verb",
+      "verb-readme-generator"
     ],
     "plugins": [
       "gulp-format-md"
