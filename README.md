@@ -142,48 +142,6 @@ console.log(log.heading('foo'));
 console.log(log.heading('foo', 'bar'));
 ```
 
-### [.spinner](index.js#L218)
-
-Start a basic terminal spinner. Currently this only allows for one spinner at a time, but there are plans to allow multiple named spinners.
-
-**Example**
-
-```js
-log.spinner('downloading...');
-```
-
-### [.spinner.stop](index.js#L244)
-
-Stop a spinner.
-
-**Example**
-
-```js
-log.spinner.stop('finished downloading');
-```
-
-### [.spinner.startTimer](index.js#L264)
-
-Start a timer with a spinner. Requires an instance of [time-diff](https://github.com/jonschlinkert/time-diff) as the first argument.
-
-**Example**
-
-```js
-var Time = require('time-diff');
-var time = new Time();
-log.spinner.startTimer(time, 'foo', 'downloading');
-```
-
-### [.spinner.stopTimer](index.js#L282)
-
-Stop a spinner-timer.
-
-**Example**
-
-```js
-log.spinner.stopTimer(time, 'foo', 'finished downloading');
-```
-
 ### Colors
 
 Available colors from [ansi-colors](https://github.com/doowb/ansi-colors):
@@ -214,6 +172,17 @@ Available colors from [ansi-colors](https://github.com/doowb/ansi-colors):
 * `.underline`
 * `.white`
 * `.yellow`
+
+## Changes
+
+**v0.2.0 (2016-07-16)**
+
+* `removed`: all spinner methods
+
+**v0.1.5 (2016-07-16)**
+
+* `added`: `.header` method
+* `fixed`: `.ok` method, so that whitespace is respected
 
 ## Related projects
 
