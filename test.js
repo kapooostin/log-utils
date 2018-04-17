@@ -5,10 +5,6 @@ var assert = require('assert');
 var utils = require('./');
 
 describe('log-utils', function() {
-  it('should export a (getter) function', function() {
-    assert(utils);
-    assert.equal(typeof utils, 'function');
-  });
   it('should expose getters', function() {
     assert(utils.hasOwnProperty('symbol'));
     assert(utils.hasOwnProperty('check'));

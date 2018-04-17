@@ -7,21 +7,32 @@
 
 'use strict';
 
-var readline = require('readline');
 var log = require('ansi-colors');
-var fn = require;
-require = log;
 
 /**
  * Utils
  */
 
-require('error-symbol');
-require('info-symbol');
-require('success-symbol', 'check');
-require('warning-symbol');
-require('time-stamp');
-require = fn;
+getter(log, 'errorSymbol', function() {
+  return require('error-symbol');
+});
+
+getter(log, 'infoSymbol', function() {
+  return require('info-symbol');
+});
+
+getter(log, 'check', function() {
+  return require('success-symbol');
+});
+
+getter(log, 'warningSymbol', function() {
+  return require('warning-symbol');
+});
+
+getter(log, 'timeStamp', function() {
+  return require('time-stamp');
+});
+
 
 /**
  * Expose `colors` and `symbols`
