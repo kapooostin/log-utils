@@ -1,7 +1,7 @@
 /*!
  * log-utils <https://github.com/jonschlinkert/log-utils>
  *
- * Copyright (c) 2016-2018, Jon Schlinkert.
+ * Copyright (c) 2016-present, Jon Schlinkert.
  * Released under the MIT License.
  */
 
