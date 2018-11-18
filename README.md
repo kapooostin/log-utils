@@ -1,6 +1,8 @@
-# log-utils [![NPM version](https://img.shields.io/npm/v/log-utils.svg?style=flat)](https://www.npmjs.com/package/log-utils) [![NPM downloads](https://img.shields.io/npm/dm/log-utils.svg?style=flat)](https://npmjs.org/package/log-utils) [![Build Status](https://img.shields.io/travis/jonschlinkert/log-utils.svg?style=flat)](https://travis-ci.org/jonschlinkert/log-utils)
+# log-utils [![NPM version](https://img.shields.io/npm/v/log-utils.svg?style=flat)](https://www.npmjs.com/package/log-utils) [![NPM monthly downloads](https://img.shields.io/npm/dm/log-utils.svg?style=flat)](https://npmjs.org/package/log-utils) [![NPM total downloads](https://img.shields.io/npm/dt/log-utils.svg?style=flat)](https://npmjs.org/package/log-utils) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/log-utils.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/log-utils)
 
-Basic logging utils: colors, symbols and timestamp.
+> Tiny wrapper around ansi-colors to add colored symbols and a timestamp.
+
+Please consider following this project's author, [Jon Schlinkert](https://github.com/jonschlinkert), and consider starring the project to show your :heart: and support.
 
 ## Install
 
@@ -10,127 +12,83 @@ Install with [npm](https://www.npmjs.com/):
 $ npm install --save log-utils
 ```
 
-All module dependencies are tiny and are lazily evaluated, this takes around ~1 millisecond to load.
-
 ## Usage
 
 ```js
-var log = require('log-utils');
+const log = require('log-utils');
 ```
 
 ## API
 
-### [.symbol.error](index.js#L44)
-
-Error symbol.
-
-**Example**
-
-```js
-console.log(log.symbol.error);
-//=> ✖
-```
-
-### [.symbol.info](index.js#L59)
-
-Info symbol.
-
-**Example**
-
-```js
-console.log(log.symbol.info);
-//=> ℹ
-```
-
-### [.symbol.success](index.js#L74)
-
-Success symbol.
-
-**Example**
-
-```js
-console.log(log.symbol.success);
-//=> ✔
-```
-
-### [.symbol.warning](index.js#L89)
-
-Warning symbol.
-
-**Example**
-
-```js
-console.log(log.symbol.warning);
-//=> ⚠
-```
-
-### [.error](index.js#L104)
+### [.error](index.js#L23)
 
 Get a red error symbol.
 
 **Example**
 
 ```js
-console.log(log.error);
-//=> ✖
+console.log(log.error); //=> ✖
 ```
 
-### [.info](index.js#L119)
+### [.info](index.js#L35)
 
 Get a cyan info symbol.
 
 **Example**
 
 ```js
-console.log(log.info);
-//=> ℹ
+console.log(log.info); //=> ℹ
 ```
 
-### [.success](index.js#L134)
+### [.success](index.js#L47)
 
 Get a green success symbol.
 
 **Example**
 
 ```js
-console.log(log.success);
-//=> ✔
+console.log(log.success); //=> ✔
 ```
 
-### [.warning](index.js#L149)
+### [.warning](index.js#L59)
 
 Get a yellow warning symbol.
 
 **Example**
 
 ```js
-console.log(log.warning);
-//=> ⚠
+console.log(log.warning); //=> ⚠
 ```
 
-### [.timestamp](index.js#L164)
+### [.timestamp](index.js#L71)
 
 Get a formatted timestamp.
 
 **Example**
 
 ```js
-console.log(log.timestamp);
-//=> [15:27:46]
+console.log(log.timestamp); //=> [15:27:46]
 ```
 
-### [.ok](index.js#L179)
+### [.ok](index.js#L93)
 
-Log a white success message prefixed by a green check.
+Returns a formatted string prefixed by a green check.
 
 **Example**
 
 ```js
-log.ok('Alright!');
-//=> '✔ Alright!'
+console.log(log.ok('   foo'));
+console.log(log.ok('  foo'));
+console.log(log.ok(' foo'));
+console.log(log.ok('foo'));
+// Results in:
+//    ✔ foo
+//   ✔ foo
+//  ✔ foo
+// ✔ foo
 ```
 
-### [.heading](index.js#L193)
+### [.heading](index.js#L112)
 
 Make the given text bold and underlined.
 
@@ -146,33 +104,6 @@ console.log(log.heading('foo', 'bar'));
 
 Available colors from [ansi-colors](https://github.com/doowb/ansi-colors):
 
-* `.bgblack`
-* `.bgblue`
-* `.bgcyan`
-* `.bggreen`
-* `.bgmagenta`
-* `.bgred`
-* `.bgwhite`
-* `.bgyellow`
-* `.black`
-* `.blue`
-* `.bold`
-* `.cyan`
-* `.dim`
-* `.gray`
-* `.green`
-* `.grey`
-* `.hidden`
-* `.inverse`
-* `.italic`
-* `.magenta`
-* `.red`
-* `.reset`
-* `.strikethrough`
-* `.underline`
-* `.white`
-* `.yellow`
-
 ## Changes
 
 **v0.2.0 (2016-07-16)**
@@ -184,54 +115,65 @@ Available colors from [ansi-colors](https://github.com/doowb/ansi-colors):
 * `added`: `.header` method
 * `fixed`: `.ok` method, so that whitespace is respected
 
-## Related projects
+## About
 
-You might also be interested in these projects:
-
-* [ansi-colors](https://www.npmjs.com/package/ansi-colors): Collection of ansi colors and styles. | [homepage](https://github.com/doowb/ansi-colors "Collection of ansi colors and styles.")
-* [error-symbol](https://www.npmjs.com/package/error-symbol): Cross-platform error symbol. | [homepage](https://github.com/jonschlinkert/error-symbol "Cross-platform error symbol.")
-* [info-symbol](https://www.npmjs.com/package/info-symbol): Cross-platform info symbol. | [homepage](https://github.com/jonschlinkert/info-symbol "Cross-platform info symbol.")
-* [success-symbol](https://www.npmjs.com/package/success-symbol): Cross-platform success symbol. | [homepage](https://github.com/jonschlinkert/success-symbol "Cross-platform success symbol.")
-* [warning-symbol](https://www.npmjs.com/package/warning-symbol): Cross-platform warning symbol. | [homepage](https://github.com/jonschlinkert/warning-symbol "Cross-platform warning symbol.")
-
-## Contributing
-
-This document was generated by [verb-readme-generator](https://github.com/verbose/verb-readme-generator) (a [verb](https://github.com/verbose/verb) generator), please don't edit directly. Any changes to the readme must be made in [.verb.md](.verb.md). See [Building Docs](#building-docs).
+<details>
+<summary><strong>Contributing</strong></summary>
 
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
 
-Or visit the [verb-readme-generator](https://github.com/verbose/verb-readme-generator) project to submit bug reports or pull requests for the readme layout template.
+</details>
 
-## Building docs
+<details>
+<summary><strong>Running Tests</strong></summary>
 
-_(This document was generated by [verb-readme-generator](https://github.com/verbose/verb-readme-generator) (a [verb](https://github.com/verbose/verb) generator), please don't edit the readme directly. Any changes to the readme must be made in [.verb.md](.verb.md).)_
-
-Generate readme and API documentation with [verb](https://github.com/verbose/verb):
-
-```sh
-$ npm install -g verb verb-readme-generator && verb
-```
-
-## Running tests
-
-Install dev dependencies:
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
 
 ```sh
-$ npm install -d && npm test
+$ npm install && npm test
 ```
 
-## Author
+</details>
+
+<details>
+<summary><strong>Building docs</strong></summary>
+
+_(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
+
+To generate the readme, run the following command:
+
+```sh
+$ npm install -g verbose/verb#dev verb-generate-readme && verb
+```
+
+</details>
+
+### Related projects
+
+You might also be interested in these projects:
+
+[ansi-colors](https://www.npmjs.com/package/ansi-colors): Easily add ANSI colors to your text and symbols in the terminal. A faster drop-in… [more](https://github.com/doowb/ansi-colors) | [homepage](https://github.com/doowb/ansi-colors "Easily add ANSI colors to your text and symbols in the terminal. A faster drop-in replacement for chalk, kleur and turbocolor (without the dependencies and rendering bugs).")
+
+### Contributors
+
+| **Commits** | **Contributor** |  
+| --- | --- |  
+| 23 | [jonschlinkert](https://github.com/jonschlinkert) |  
+| 5  | [doowb](https://github.com/doowb) |  
+
+### Author
 
 **Jon Schlinkert**
 
-* [github/jonschlinkert](https://github.com/jonschlinkert)
-* [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+* [GitHub Profile](https://github.com/jonschlinkert)
+* [Twitter Profile](https://twitter.com/jonschlinkert)
+* [LinkedIn Profile](https://linkedin.com/in/jonschlinkert)
 
-## License
+### License
 
-Copyright © 2016, [Jon Schlinkert](https://github.com/jonschlinkert).
-Released under the [MIT license](https://github.com/jonschlinkert/log-utils/blob/master/LICENSE).
+Copyright © 2018, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on July 11, 2016._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.8.0, on November 17, 2018._

@@ -1,15 +1,17 @@
 'use strict';
 
-var utils = require('./');
+const log = require('./');
 
-for (var key in utils) {
-  var val = utils[key];
-  if (typeof val === 'string') {
-    console.log(val, `(${key})`);
+for (let key in log) {
+  if (typeof log[key] === 'string') {
+    console.log(log[key], `${key}`);
   }
 }
 
-// console.log(utils.heading('foo', 'bar'));
-// console.log(utils.timestamp);
-// console.log(utils.symbol);
-utils.ok('   foo');
+console.log(log.heading('foo', 'bar'));
+// console.log(log.timestamp);
+// console.log(log.symbols);
+console.log(log.ok('   foo'));
+console.log(log.ok('  foo'));
+console.log(log.ok(' foo'));
+console.log(log.ok('foo'));
