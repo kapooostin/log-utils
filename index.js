@@ -6,9 +6,8 @@
 
 'use strict';
 
-const timestamp = require('time-stamp');
+const time = require('time-stamp');
 const colors = require('ansi-colors');
-const log = console.log;
 
 /**
  * Get a red error symbol.
@@ -19,8 +18,7 @@ const log = console.log;
  * @name .error
  * @api public
  */
-
-getter(log, 'error', () => colors.red(colors.symbols.cross));
+const error = colors.red(colors.symbols.cross),
 
 /**
  * Get a cyan info symbol.
@@ -31,8 +29,7 @@ getter(log, 'error', () => colors.red(colors.symbols.cross));
  * @name .info
  * @api public
  */
-
-getter(log, 'info', () => colors.cyan(colors.symbols.info));
+const info = colors.cyan(colors.symbols.info),
 
 /**
  * Get a green success symbol.
@@ -43,8 +40,7 @@ getter(log, 'info', () => colors.cyan(colors.symbols.info));
  * @name .success
  * @api public
  */
-
-getter(log, 'success', () => colors.green(colors.symbols.check));
+const success = colors.green(colors.symbols.check),
 
 /**
  * Get a yellow warning symbol.
@@ -55,8 +51,7 @@ getter(log, 'success', () => colors.green(colors.symbols.check));
  * @name .warning
  * @api public
  */
-
-getter(log, 'warning', () => colors.yellow(colors.symbols.warning));
+const warning = colors.yellow(colors.symbols.warning),
 
 /**
  * Get a formatted timestamp.
@@ -67,10 +62,7 @@ getter(log, 'warning', () => colors.yellow(colors.symbols.warning));
  * @name .timestamp
  * @api public
  */
-
-getter(log, 'timestamp', () => {
-  return '[' + colors.gray(timestamp('HH:mm:ss')) + ']';
-});
+const timestamp = () => `[${colors.gray(time('HH:mm:ss'))}]`;
 
 /**
  * Returns a formatted string prefixed by a green check.
@@ -89,13 +81,10 @@ getter(log, 'timestamp', () => {
  * @name .ok
  * @api public
  */
-
-log.ok = str => {
-  let ok = colors.green(colors.symbols.check);
-  return str.replace(/^(\s*)(.*?)$/, (m, s, v) => {
-    return s + ok + ' ' + v;
-  });
-};
+const ok = str => str.replace(
+  /^(\s*)(.*?)$/,
+  (m, s, v) => `${s}${success} ${v}`
+);
 
 /**
  * Make the given text bold and underlined.
@@ -109,27 +98,24 @@ log.ok = str => {
  * @api public
  */
 
-log.heading = (...args) => {
-  let str = args.filter(v => v !== void 0).map(String).join(' ');
-  return colors.bold.underline(str);
-};
-
-/**
- * Utility for defining a getter
- */
-
-function getter(obj, prop, fn) {
-  Object.defineProperty(obj, prop, {
-    configurable: true,
-    enumerable: true,
-    get: fn
-  });
-}
+const heading = (...args) => colors.bold.underline(
+  args.filter(v => v !== void 0)
+      .map(String)
+      .join(' ')
+);
 
 /**
  * Expose `log`
  */
+const log = {
+  error,
+  info,
+  success,
+  warning,
+  timestamp,
+  ok,
+  heading,
+};
 
 log.__proto__ = colors;
 module.exports = log;
-

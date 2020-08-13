@@ -5,10 +5,10 @@ const assert = require('assert');
 const log = require('./');
 
 describe('log-utils', function() {
-  it('should export a function', function() {
-    assert(log);
-    assert.equal(typeof log, 'function');
-  });
+  // it('should export a function', function() {
+  //   assert(log);
+  //   assert.equal(typeof log, 'function');
+  // });
 
   it('should expose getters', function() {
     assert(log.symbols);
